@@ -8,9 +8,22 @@
 	3. Microservices : Spring Cloud
 
 ### 목차
-1. Spring PetClinc 샘플 애플리케이션 소개
-2. 실습 사전요건 안내
-  
+
+1. 실습 사전요건 안내
+2. Spring PetClinc 샘플 애플리케이션 소개
+
+## 실습 사전요건
+
+1. Maven - [Install](https://maven.apache.org/install.html)
+2. Docker Toolbox [Install](https://docs.docker.com/toolbox/overview/)
+3. Minikube [Install](https://github.com/kubernetes/minikube)
+4. ICP [Install](https://github.com/IBM/deploy-ibm-cloud-private/blob/master/docs/deploy-vagrant.md)
+5. Kubectl [Install](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+6. Kompose [Install](https://github.com/kubernetes/kompose)
+7. IBM Cloud CLI  [Install](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
+7. IBM Cloud Private CLI - bx pr [Install](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/manage_cluster/install_cli.html)
+
+
 ## Spring PetClinic 샘플 애플리케이션
 
 * 소유자, 애완동물, 진료예약, 수의사 등록 및 관리
@@ -25,6 +38,7 @@
 
 Link	| Main technologies
 -------|-----
+[spring-petclinic](https://github.com/spring-projects/spring-petclinic)	| Spring Boot
 [spring-framework-petclinic](https://github.com/spring-petclinic/spring-framework-petclinic)	| Spring Framework XML configuration, JSP pages, 3 persistence layers: JDBC, JPA and Spring Data JPA
 [spring-petclinic-microservices](https://github.com/spring-petclinic/spring-petclinic-microservices)	| Distributed version of Spring Petclinic built with Spring Cloud
 [spring-petclinic-angularjs](https://github.com/spring-petclinic/spring-petclinic-angularjs)	| AngularJS 1.x, Spring Boot and Spring Data JPA
@@ -52,17 +66,6 @@ Link	| Main technologies
 ![](images/UI_VetsList.png) 
 
   
-## 실습 사전요건
-
-1. Maven - [Install](https://maven.apache.org/install.html)
-2. Docker Toolbox [Install](https://docs.docker.com/toolbox/overview/)
-3. Minikube [Install](https://github.com/kubernetes/minikube)
-4. ICP [Install](https://github.com/IBM/deploy-ibm-cloud-private/blob/master/docs/deploy-vagrant.md)
-5. Kubectl [Install](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
-6. Kompose [Install](https://github.com/kubernetes/kompose)
-7. IBM Cloud CLI  [Install](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
-7. IBM Cloud Private CLI - bx pr [Install](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/manage_cluster/install_cli.html)
-
 
 
 
