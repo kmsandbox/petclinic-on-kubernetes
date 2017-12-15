@@ -9,10 +9,11 @@
 
 ### 목차
 
-1. 실습 사전요건 안내
-2. Spring PetClinc 샘플 애플리케이션 소개
+1. Prereq
+2. Test 
+3. Spring PetClinc 샘플 애플리케이션 소개
 
-## 실습 사전요건
+## Prerequisite
 
 1. Maven - [Install](https://maven.apache.org/install.html)
 2. Docker Toolbox [Install](https://docs.docker.com/toolbox/overview/)
@@ -22,6 +23,11 @@
 6. Kompose [Install](https://github.com/kubernetes/kompose)
 7. IBM Cloud CLI  [Install](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html#getting-started)
 7. IBM Cloud Private CLI - bx pr [Install](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/manage_cluster/install_cli.html)
+
+## Test Environment
+
+1. 로컬 : MacOS, or Windows with Docker Toolbox
+2. ICP Server : Master, Proxy, Worker 1/2 [스펙]
 
 
 ## Spring PetClinic 샘플 애플리케이션

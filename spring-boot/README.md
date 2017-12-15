@@ -1,4 +1,4 @@
-# 스프링 부트 기반 펫클리닉 애플리케이션 
+# 스프링 부트 - 펫클리닉 애플리케이션 
 
 ## technology stack
 
@@ -11,7 +11,10 @@ View	|	Thymeleaf
 Databases support	|	HSQLDB, MySQL
 Containers support	|	Embbeded Tomcat and Jetty
 Java support	|	Java 8
-
+  
+  
+. 사전준비 : Maven, Docker, Minikube, Kubectl, Kompose, ICP CE  
+. 작업환경 : 로컬 개발, ICP 서버  
 
 0. 요약 정리 : 이미지화
 1. Local test - maven 
