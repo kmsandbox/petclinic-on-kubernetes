@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 docker push stdcluster.icp:8500/default/spring-petclinic-tracing-server:latest
 docker push stdcluster.icp:8500/default/spring-petclinic-api-gateway:latest
 docker push stdcluster.icp:8500/default/spring-petclinic-discovery-server:latest

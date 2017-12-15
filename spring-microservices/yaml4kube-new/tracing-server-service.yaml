@@ -9,7 +9,6 @@ metadata:
     io.kompose.service: tracing-server
   name: tracing-server
 spec:
-  type: NodePort
   ports:
   - name: "9411"
     port: 9411

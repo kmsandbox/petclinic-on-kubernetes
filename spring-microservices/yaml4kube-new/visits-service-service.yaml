@@ -9,7 +9,6 @@ metadata:
     io.kompose.service: visits-service
   name: visits-service
 spec:
-  type: NodePort
   ports:
   - name: "8082"
     port: 8082

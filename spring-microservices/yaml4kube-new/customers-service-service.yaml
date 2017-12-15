@@ -9,7 +9,6 @@ metadata:
     io.kompose.service: customers-service
   name: customers-service
 spec:
-  type: NodePort
   ports:
   - name: "8081"
     port: 8081

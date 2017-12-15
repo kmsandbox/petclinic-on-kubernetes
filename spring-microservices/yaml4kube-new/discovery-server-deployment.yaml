@@ -18,9 +18,16 @@ spec:
         io.kompose.service: discovery-server
     spec:
       containers:
-      - command: ["/bin/sh", "-c"]
-        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
-        image: default/spring-petclinic-discovery-server
+      - command:
+        - ./wait-for-it.sh
+        - config-server:8888
+        - --timeout=60
+        - --
+        - java
+        - -Djava.security.egd=file:/dev/./urandom
+        - -jar
+        - /app.jar
+        image: stdcluster.icp:8500/default/spring-petclinic-discovery-server
         name: discovery-server
         ports:
         - containerPort: 8761

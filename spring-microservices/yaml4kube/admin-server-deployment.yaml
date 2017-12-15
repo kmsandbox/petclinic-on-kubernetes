@@ -18,8 +18,15 @@ spec:
         io.kompose.service: admin-server
     spec:
       containers:
-      - command: ["/bin/sh", "-c"]
-        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
+      - command:
+        - ./wait-for-it.sh
+        - discovery-server:8761
+        - --timeout=60
+        - --
+        - java
+        - -Djava.security.egd=file:/dev/./urandom
+        - -jar
+        - /app.jar
         image: mszarlinski/spring-petclinic-admin-server
         name: admin-server
         ports:

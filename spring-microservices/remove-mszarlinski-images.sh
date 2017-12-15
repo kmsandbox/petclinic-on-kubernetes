@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+  
 docker rmi mszarlinski/spring-petclinic-tracing-server
 docker rmi mszarlinski/spring-petclinic-api-gateway
 docker rmi mszarlinski/spring-petclinic-discovery-server

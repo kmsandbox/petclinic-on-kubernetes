@@ -18,8 +18,15 @@ spec:
         io.kompose.service: tracing-server
     spec:
       containers:
-      - command: ["/bin/sh", "-c"]
-        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
+      - command:
+        - ./wait-for-it.sh
+        - discovery-server:8761
+        - --timeout=60
+        - --
+        - java
+        - -Djava.security.egd=file:/dev/./urandom
+        - -jar
+        - /app.jar
         image: mszarlinski/spring-petclinic-tracing-server
         name: tracing-server
         ports:

@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+  
 docker tag mszarlinski/spring-petclinic-tracing-server:latest stdcluster.icp:8500/default/spring-petclinic-tracing-server:latest
 docker tag mszarlinski/spring-petclinic-api-gateway:latest stdcluster.icp:8500/default/spring-petclinic-api-gateway:latest
 docker tag mszarlinski/spring-petclinic-discovery-server:latest stdcluster.icp:8500/default/spring-petclinic-discovery-server:latest

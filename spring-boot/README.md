@@ -12,17 +12,6 @@ Databases support	|	HSQLDB, MySQL
 Containers support	|	Embbeded Tomcat and Jetty
 Java support	|	Java 8
   
-  
-. 사전준비 : Maven, Docker, Minikube, Kubectl, Kompose, ICP CE  
-. 작업환경 : 로컬 개발, ICP 서버  
-
-0. 요약 정리 : 이미지화
-1. Local test - maven 
-2. Dockerfile 
-3. Local test - docker toolbox 
-4. push docker image to Kubernetes - minikube or ICP 
-5. apply deployment 
-6. tara 
 
 
 ### Step 1: 마이그레이션 대상 애플리케이션 - 로컬 테스트
