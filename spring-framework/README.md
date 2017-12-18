@@ -16,23 +16,28 @@ Java support	|	Java 7 and 8
 &nbsp;
 ### Step 1: 실습용 쉘 스크립트 다운로드 
 
-실습에 사용한 쉘 스크립트를 다운로드해 활용합니다.
-
-	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
-	# cd spring-framework
-
+```
+# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
+# cd spring-framework
+```
 
 &nbsp;
-### Step 2: 마이그레이션 대상 애플리케이션 - 로컬 테스트
+### Step 2: 마이그레이션 대상 애플리케이션의 정상 동작 여부 확인
 
-#### A. 코드 
+마이그레이션할 애플리케이션이 정상 동작하는지 확인합니다. 빌드나 실행에 문제가 있을 때는 반드시 해결하고 나서 다음 단계로 진행합니다.
 
+#### A. 샘플 애플리케이션 소스 다운로드 (clong-git.sh)
+
+```
 	git clone https://github.com/spring-petclinic/spring-framework-petclinic
+```
 
 #### B. 로컬 실행 
 
+```
 	cd spring-framework-petclinic
 	./mvnw tomcat7:run-war
+```
 
 #### C. 애플리케이션 동작 확인
 
