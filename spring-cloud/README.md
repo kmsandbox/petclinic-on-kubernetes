@@ -35,6 +35,7 @@ Admin Server (Spring Boot Admin) | http://localhost:9090
 &nbsp;
 ### Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드
 
+
 #### A. 샘플 애플리케이션 소스 다운로드 (spring-cloud/clone-petclinic-microservices.sh)
 
 	# git clone https://github.com/spring-petclinic/spring-petclinic-microservices.git
@@ -82,6 +83,7 @@ Admin Server (Spring Boot Admin) | http://localhost:9090
 &nbsp;
 ### Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
 
+
 #### A. 컨테이너 실행 (spring-cloud/test-local-docker-1.sh)
 
 	# cd spring-petclinic-microservices
@@ -105,10 +107,12 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 	# sleep 10s
 	# docker-compose up tracing-server &
 
+
 #### B. 컨테이너 목록 확인
 
 	# docker ps | grep spring-petclinic
 	
+
 #### C. 접속 확인
 
 	# curl http://localhost:8761
@@ -117,6 +121,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 	# curl http://localhost:9411
 	# curl http://localhost:9090
 	
+
 #### D. 컨테이너 제거
 
 	# cd spring-petclinic-microservices
@@ -125,6 +130,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 &nbsp;
 ### Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
+
 
 #### A. 이미지 이름 변경 (spring-cloud/retag-image.sh)
 
@@ -136,6 +142,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 	# docker tag mszarlinski/spring-petclinic-vets-service:latest stdcluster.icp:8500/default/spring-petclinic-vets-service:latest
 	# docker tag mszarlinski/spring-petclinic-customers-service:latest stdcluster.icp:8500/default/spring-petclinic-customers-service:latest
 	# docker tag mszarlinski/spring-petclinic-admin-server:latest stdcluster.icp:8500/default/spring-petclinic-admin-server:latest
+
 
 #### B. 이미지 이름 확인 
 	
@@ -165,6 +172,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 	# docker login stdcluster.icp:8500
 
+
 #### D. ICP Private Docker Registry에 이미지 등록 (spring-cloud/push-image.sh)
 
 	# docker push stdcluster.icp:8500/default/spring-petclinic-config-server:latest
@@ -176,11 +184,13 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 	# docker push stdcluster.icp:8500/default/spring-petclinic-admin-server:latest
 	# docker push stdcluster.icp:8500/default/spring-petclinic-tracing-server:latest
 	
+
 #### E. ICP UI에서 등록된 이미지 목록 확인
 
 
 &nbsp;
 ### Step 5. IBM Cloud Private에 샘플 애플리케이션 배포하기
+
 
 #### A. Kompose로 docker-compose.yml을 변환해 Kubernetes용 yaml 만들기
 
@@ -208,6 +218,7 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 		INFO Kubernetes file "vets-service-deployment.yaml" created 
 		INFO Kubernetes file "visits-service-deployment.yaml" created 
 
+
 #### B. 생성된 yaml에서 image와 command-arg 수정 (spring-cloud/replace-imagenames-in-yaml.sh)
 
 	# cd ..
@@ -217,6 +228,7 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	# sed -i 's/mszarlinski/default/g' *deployment.yaml
 	# cat customers-service-deployment.yaml
 	# cat customers-service-service.yaml
+
 
 #### C. ICP Docker Registry에 image push (spring-cloud/push-images.sh)
 
@@ -229,7 +241,8 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	# docker push stdcluster.icp:8500/default/spring-petclinic-tracing-server:latest
 	# docker push stdcluster.icp:8500/default/spring-petclinic-admin-server:latest
 
-#### C. 샘플 애플리케이션 객체 배포 (spring-cloud/kube-apply.sh)
+
+#### D. 샘플 애플리케이션 객체 배포 (spring-cloud/kube-apply.sh)
 
 	# kubectl apply -f yaml4kube-new/config-server-service.yaml
 	# kubectl apply -f yaml4kube-new/config-server-deployment.yaml
@@ -258,13 +271,16 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	# kubectl get deployment,svc,pods,pvc	
 
 
-#### D. 배포 결과 확인
+#### E. 배포 결과 확인
+
+서비스 목록을 확인해 각 샘플 애플리케이션 서비스의 NodePort를 확인하고, 서비스 동작 여부를 확인합니다.
 
 	# kubectl get deploy,svc
 	
 	# curl http://<Proxy_IP>:<NodePort>
 
-#### E. 샘플 애플리케이션 객체 제거  (spring-cloud/kube-delete.sh)
+
+#### F. 샘플 애플리케이션 객체 제거  (spring-cloud/kube-delete.sh)
 
 	# kubectl delete -f yaml4kube-new/config-server-service.yaml	
 	# kubectl delete -f yaml4kube-new/config-server-deployment.yaml	
