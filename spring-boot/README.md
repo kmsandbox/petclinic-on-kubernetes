@@ -16,43 +16,35 @@ Java support	|	Java 8
 &nbsp;
 ### Step 1: 실습용 쉘 스크립트 다운로드 
 
-```bash
-# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
-# cd spring-boot
-```
-
+	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
+	# cd spring-boot
+	
 
 &nbsp;
 ### Step 2: 마이그레이션 대상 애플리케이션의 정상 동작 여부 확인
 
 마이그레이션할 애플리케이션이 정상 동작하는지 확인합니다. 빌드나 실행에 문제가 있을 때는 반드시 해결하고 나서 다음 단계로 진행합니다.
 
-#### A. 샘플 애플리케이션 소스 다운로드 (clong-git.sh)
+#### A. 샘플 애플리케이션 소스 다운로드 (spring-boot/clone-petclinic.sh)
 
-```bash
-# git clone https://github.com/spring-projects/spring-petclinic
-# cd spring-petclinic
-```
+	# git clone https://github.com/spring-projects/spring-petclinic
 
-#### B. 빌드 및 실행  (spring-boot/clone-petclinic.sh)
+#### B. 빌드 및 실행 
 
-```
-# cd spring-petclinic
-# ./mvnw spring-boot:run
-```
+	# cd spring-petclinic
+	# ./mvnw spring-boot:run
 
 #### C. 애플리케이션 서비스 정상 동작 확인 
 
-```
-# curl http://localhost:8080/
-```
+	# curl http://localhost:8080/
+
 
 &nbsp;
-### Step 3: 샘플 애플리케이션과 실행 환경을 도커 이미지로 작성 
+### Step 3: 샘플 애플리케이션과 실행 환경을 도커 이미지로 작성
 
 #### A. Dockerfile  (cat spring-boot/Dockerfile)
 
-도커 이미지를 만들기 위한 템플릿을 정의합니다. 이 Dockerfile에서는 3단계에 걸쳐 이미지를 생성하며 ${arg}는 docker build 명령어의 build-arg 인자로 받습니다.  
+도커성이미지를 만들기 위한 템플릿을 정의합니다. 이 Dockerfile에서는 3단계에 걸쳐 이미지를 생성하며 ${arg}는 docker build 명령어의 build-arg 인자로 받습니다.  
 * 1단계 clone : 애플리케이션 소스를 컨테이너 내로 다운로드한 이미지를 생성합니다.
 * 2단계 build : clone 컨테이너에 다운로드된 애플리케이션 코드를 maven으로 빌드해 패키지를 만듭니다.
 * 3단계 target : build 컨테이너로부터 애플리케이션 패키지를 복사하고 서비스 포트를 지정한 다음 애플리케이션을 실행시킵니다.
@@ -84,60 +76,61 @@ CMD ["java -jar ${artifact}"]
 
 도커 이미지 이름은 -t 옵션으로 지정하고, Dockerfile에 기입된 내용으로 이미지를 빌드합니다.
 
-```
-# docker build --build-arg url=https://github.com/spring-projects/spring-petclinic.git\
-  --build-arg project=spring-petclinic\
-  --build-arg artifactid=spring-petclinic\
-  --build-arg version=1.5.1\
-  -t nfrankel/spring-petclinic - < Dockerfile
-```
+
+	# docker build --build-arg url=https://github.com/spring-projects/spring-petclinic.git\
+	  --build-arg project=spring-petclinic\
+	  --build-arg artifactid=spring-petclinic\
+	  --build-arg version=1.5.1\
+	  -t nfrankel/spring-petclinic - < Dockerfile
+
 
 #### C. 도커 이미지 목록 확인 
 
-```
-# docker images
+	# docker images
 
-REPOSITORY		TAG		IMAGE ID		CREATED		SIZE
-nfrankel/spring-petclinic	latest	447903f1397a	2 days ago	118MB
-```
+	REPOSITORY		TAG		IMAGE ID		CREATED		SIZE
+	nfrankel/spring-petclinic	latest	447903f1397a	2 days ago	118MB
+
 
 &nbsp;
 ### Step 4: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
 
 #### A. 컨테이너 실행 (spring-boot/run.sh)
 
-```
-# docker run -ti -p8080:8080 nfrankel/spring-petclinic
-```
+	# docker run -ti -p8080:8080 nfrankel/spring-petclinic
+
 
 #### B. 컨테이너 목록 확인
 
-```
 # docker ps | grep spring-petclinic
-```
+
 
 #### C. 애플리케이션 서비스 정상 동작 확인 
 
-```
 # curl http://localhost:8080/
-```
+
+
+#### D. 컨테이너 제거
+
+	# docker stop <container_id>
+	# docker rm <container_id>
+
 
 &nbsp;
 ### Step 5: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
 
 #### A. 이미지 이름 변경 (spring-boot/retag-image.sh)
-```
-# docker tag nfrankel/spring-petclinic:latest stdcluster.icp:8500/default/spring-petclinic:latest
-```
+
+	# docker tag nfrankel/spring-petclinic:latest stdcluster.icp:8500/default/spring-petclinic:latest
+
 
 #### B. 이미지 이름 확인 
 
-```	
-# docker images | grep petclinic
 
-nfrankel/spring-petclinic	latest	94f9a87f5f2c	2 days ago	118MB
-stdcluster.icp:8500/default/spring-petclinic	latest	94f9a87f5f2c	2 days ago	118MB
-```
+	# docker images | grep petclinic
+
+	nfrankel/spring-petclinic	latest	94f9a87f5f2c	2 days ago	118MB
+	stdcluster.icp:8500/default/spring-petclinic	latest	94f9a87f5f2c	2 days ago	118MB
 
 #### C. ICP Private Docker Registry에 로그인
 	
@@ -164,9 +157,8 @@ stdcluster.icp:8500/default/spring-petclinic	latest	94f9a87f5f2c	2 days ago	118M
 
 #### D. ICP Private Docker Registry에 이미지 등록 (spring-boot/push-image.sh)
 
-```
-# docker push stdcluster.icp:8500/default/spring-petclinic
-```
+	# docker push stdcluster.icp:8500/default/spring-petclinic
+
 
 #### E. ICP UI에서 등록된 이미지 목록 확인
 
@@ -216,16 +208,17 @@ spec:
           protocol: TCP  
 ```
 
-#### B. Deployment 객체 배포  (spring-boot/apply-yaml.sh)
+#### B. 샘플 애플리케이션 객체 배포  (spring-boot/apply-yaml.sh)
 
-```
-# kubectl apply -f deployment.yaml
-```
+	# kubectl apply -f deployment.yaml
 
 #### C. 배포 결과 확인
 
-```
-kubectl get deploy,svc | grep petclinic
+	# kubectl get deploy,svc | grep petclinic
 
-curl http://<proxy:ip>:<NodePort>
-```
+	# curl http://<proxy:ip>:<NodePort>
+
+#### D. 샘플 애플리케이션 객체 제거   (spring-boot/delete-yaml.sh)
+
+	# kubectl delete -f deployment.yaml
+
