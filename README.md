@@ -25,7 +25,7 @@
 
 * 애플리케이션 실행환경
 	1. Docker Toolbox [Install](https://docs.docker.com/toolbox/overview/)
-	2. Kubernetes : 여기에서는 ICP CE를 사용합니다.
+	2. Kubernetes : 실습에서는 ICP CE를 사용합니다.
 		- IBM Cloud Private Community Edition [Install](https://github.com/IBM/deploy-ibm-cloud-private/blob/master/docs/deploy-vagrant.md)
 		- Minikube [Install](https://github.com/kubernetes/minikube)
 
@@ -56,7 +56,6 @@
 Spring PetClinic은 소유자와 애완동물, 수의사, 진료예약 등을 등록, 관리하는 간단한 샘플 애플리케이션입니다. 다양한 스프링 프레임워크 기술 스택을 활용해 간단하지만 강력한 DB 연동 애플리케이션을 구현하는 방법을 시연하는 목적을 가지고 있습니다.  
 
 
-&nbsp;
 ### Spring PetClinic의 다양한 버전
 
 * [Spring Petclinic 마스터 브랜치](https://github.com/spring-projects/spring-petclinic)는 GitHub spring-projects 조직에서 관리되며, 현재 Spring Boot와 Thymeleaf로 구현되어 있습니다. 그 외에도 Spring Framework, AngularJS, Spring Cloud 등 다른 기술스택으로 구현된 버전이 있습니다.
@@ -76,6 +75,7 @@ Link	| Main technologies
 
 &nbsp;
 #### Spring PetClinic: Domain Model
+
 
 ![Domain model](images/Domain_Model.png)
 
