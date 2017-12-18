@@ -18,7 +18,7 @@ Java support	|	Java 8
 
 실습에 사용한 쉘 스크립트를 다운로드해 활용합니다.
 
-``` /bin/bash
+```bash
 # git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
 # cd spring-boot
 ```
@@ -31,7 +31,7 @@ Java support	|	Java 8
 
 #### A. 샘플 애플리케이션 소스 다운로드 (clong-git.sh)
 
-``` /bin/bash
+```bash
 # git clone https://github.com/spring-projects/spring-petclinic
 # cd spring-petclinic
 ```
