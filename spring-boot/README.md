@@ -52,6 +52,7 @@ Java support	|	Java 8
 * 2단계 build : clone 컨테이너에 다운로드된 애플리케이션 코드를 maven으로 빌드해 패키지를 만듭니다.
 * 3단계 target : build 컨테이너로부터 애플리케이션 패키지를 복사해 실행시키며 서비스 포트를 지정합니다.  
 
+```
 	FROM alpine/git as clone  
 	ARG url  
 	WORKDIR /app  
@@ -72,6 +73,7 @@ Java support	|	Java 8
 	EXPOSE 8080  
 	ENTRYPOINT ["sh", "-c"]  
 	CMD ["java -jar ${artifact}"]   
+```
 
 #### B. 도커 이미지 빌드 (spring-boot/build.sh)
 
@@ -157,6 +159,7 @@ Java support	|	Java 8
 * Service 객체 : 애플리케이션 컨테이너의 외부 노출을 위해 NodePort 타입과 서비스 포트 등 지원합니다.
 * Deployment 객체 : 리플리카 셋과 이미지의 태그 이름으로 컨테이너 생성 
 
+```
 	apiVersion: v1  
 	kind: Service  
 	metadata:  
@@ -191,6 +194,7 @@ Java support	|	Java 8
 	        ports:  
 	        - containerPort: 8080  
 	          protocol: TCP  
+```
 
 #### B. Deployment 객체 배포  (spring-boot/apply-yaml.sh)
 
