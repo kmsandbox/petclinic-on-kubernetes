@@ -18,8 +18,10 @@ Java support	|	Java 8
 
 실습에 사용한 쉘 스크립트를 다운로드해 활용합니다.
 
-	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
-	# cd spring-boot
+``` /bin/bash
+# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
+# cd spring-boot
+```
 
 
 &nbsp;
@@ -29,8 +31,10 @@ Java support	|	Java 8
 
 #### A. 샘플 애플리케이션 소스 다운로드 (clong-git.sh)
 
-	# git clone https://github.com/spring-projects/spring-petclinic
-	# cd spring-petclinic
+``` /bin/bash
+# git clone https://github.com/spring-projects/spring-petclinic
+# cd spring-petclinic
+```
 
 #### B. 빌드 및 실행  (spring-boot/clone-petclinic.sh)
 
@@ -53,26 +57,26 @@ Java support	|	Java 8
 * 3단계 target : build 컨테이너로부터 애플리케이션 패키지를 복사해 실행시키며 서비스 포트를 지정합니다.  
 
 ```
-	FROM alpine/git as clone  
-	ARG url  
-	WORKDIR /app  
-	RUN git clone ${url}  
-	
-	FROM maven:3.5-jdk-8-alpine as build  
-	ARG project  
-	WORKDIR /app  
-	COPY --from=clone /app/${project} /app  
-	RUN mvn install  
-	
-	FROM openjdk:8-jre-alpine as target  
-	ARG artifactid  
-	ARG version  
-	ENV artifact ${artifactid}-${version}.jar  
-	WORKDIR /app  
-	COPY --from=build /app/target/${artifact} /app  
-	EXPOSE 8080  
-	ENTRYPOINT ["sh", "-c"]  
-	CMD ["java -jar ${artifact}"]   
+FROM alpine/git as clone  
+ARG url  
+WORKDIR /app  
+RUN git clone ${url}  
+
+FROM maven:3.5-jdk-8-alpine as build  
+ARG project  
+WORKDIR /app  
+COPY --from=clone /app/${project} /app  
+RUN mvn install  
+
+FROM openjdk:8-jre-alpine as target  
+ARG artifactid  
+ARG version  
+ENV artifact ${artifactid}-${version}.jar  
+WORKDIR /app  
+COPY --from=build /app/target/${artifact} /app  
+EXPOSE 8080  
+ENTRYPOINT ["sh", "-c"]  
+CMD ["java -jar ${artifact}"]   
 ```
 
 #### B. 도커 이미지 빌드 (spring-boot/build.sh)
@@ -154,46 +158,46 @@ Java support	|	Java 8
 &nbsp;
 ### Step 6. IBM Cloud Private에 샘플 애플리케이션 배포하기
 
-#### A. 애플리케이션 컨테이너 실행과 노출을 위한 배포용 객체 작성 (cat spring-boot/deployment.yml)
+#### A. Pod 생성과 노출을 위한 배포용 객체 작성 (cat spring-boot/deployment.yml)
 
-* Service 객체 : 애플리케이션 컨테이너의 외부 노출을 위해 NodePort 타입과 서비스 포트 등 지원합니다.
-* Deployment 객체 : 리플리카 셋과 이미지의 태그 이름으로 컨테이너 생성 
+* Service 객체 : Pod의 외부 노출을 위해 NodePort 타입 서비스를 생성합니다.
+* Deployment 객체 : ReplacaSet과 그 대상인 Pod를 생성합니다. 
 
-```
-	apiVersion: v1  
-	kind: Service  
-	metadata:  
-	  name: sb-petclinic-service  
-	  labels:  
-	    app: sb-petclinic  
-	spec:  
-	  type: NodePort   
-	  ports:  
-	    - name: http  
-	      port: 8080  
-	      targetPort: 8080  
-	  selector:  
-	    app: sb-petclinic  
-	---  
-	apiVersion: extensions/v1beta1  
-	kind: Deployment  
-	metadata:  
-	  labels:  
-	    app: sb-petclinic  
-	  name: sb-petclinic  
-	spec:  
-	  replicas: 1  
-	  template:   
-	    metadata:  
-	      labels:  
-	        app: sb-petclinic  
-	    spec:  
-	      containers:  
-	      - image: stdcluster.icp:8500/default/spring-petclinic  
-	        name: sb-petclinic  
-	        ports:  
-	        - containerPort: 8080  
-	          protocol: TCP  
+``` 
+apiVersion: v1  
+kind: Service  
+metadata:  
+  name: sb-petclinic-service  
+  labels:  
+    app: sb-petclinic  
+spec:  
+  type: NodePort   
+  ports:  
+    - name: http  
+      port: 8080  
+      targetPort: 8080  
+  selector:  
+    app: sb-petclinic  
+---  
+apiVersion: extensions/v1beta1  
+kind: Deployment  
+metadata:  
+  labels:  
+    app: sb-petclinic  
+  name: sb-petclinic  
+spec:  
+  replicas: 1  
+  template:   
+    metadata:  
+      labels:  
+        app: sb-petclinic  
+    spec:  
+      containers:  
+      - image: stdcluster.icp:8500/default/spring-petclinic  
+        name: sb-petclinic  
+        ports:  
+        - containerPort: 8080  
+          protocol: TCP  
 ```
 
 #### B. Deployment 객체 배포  (spring-boot/apply-yaml.sh)

@@ -1,4 +1,4 @@
-# 스프링 프레임워크 - 펫클리닉 애플리케이션 
+# Spring Framework - PetClinic Application
 
 ## 기술 구성
 
