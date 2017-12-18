@@ -1,6 +1,6 @@
 # 스프링 프레임워크 - 펫클리닉 애플리케이션 
 
-## technology stack
+## 기술 구성
 
 Category | Spring Framework Petclinic
 ---------|---------
@@ -13,8 +13,17 @@ Containers support	|	Tomcat 7, 8 and Jetty 9
 Java support	|	Java 7 and 8
 
 
+&nbsp;
+### Step 1: 실습용 쉘 스크립트 다운로드 
 
-### Step 1: 마이그레이션 대상 애플리케이션 - 로컬 테스트
+실습에 사용한 쉘 스크립트를 다운로드해 활용합니다.
+
+	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
+	# cd spring-framework
+
+
+&nbsp;
+### Step 2: 마이그레이션 대상 애플리케이션 - 로컬 테스트
 
 #### A. 코드 
 
@@ -29,7 +38,10 @@ Java support	|	Java 7 and 8
 
 	curl http://localhost:9966/petclinic
 
-### Step 2: 컨테이너화 : 도커파일 작성
+
+
+&nbsp;
+### Step 3: 컨테이너화 : 도커파일 작성
 
 #### A. Dockerfile
 
@@ -69,7 +81,8 @@ Java support	|	Java 7 and 8
 	local-docker/spring-framework-petclinic	latest	fc7db0ed5a6c	3 days ago	491MB
 
 
-### Step 3: 로컬 도커엔진에 이미지 배포해 컨테이너 동작 확인
+&nbsp;
+### Step 4: 로컬 도커엔진에 이미지 배포해 컨테이너 동작 확인
 
 #### A. 이미지를 로컬 도커에 배포 
 
@@ -90,7 +103,9 @@ Java support	|	Java 7 and 8
 	
 	docker container prune 
 
-### Step 4: push docker image to Kubernetes - minikube or ICP 
+
+&nbsp;
+### Step 5: push docker image to Kubernetes - minikube or ICP 
 
 #### A. retag the image
 
@@ -112,7 +127,10 @@ Java support	|	Java 7 and 8
 #### D. Push image
 
 	docker push stdcluster.icp:8500/default/spring-framework-petclinic		
-### Step 5. apply deployment 
+
+
+&nbsp;
+### Step 6. apply deployment 
 
 #### A. Deployment.yaml 작성
 
@@ -160,9 +178,5 @@ Java support	|	Java 7 and 8
 
 	kubectl get deploy,svc | grep petclinic
 	
-	curl http://10.10.16.48:31637/petclinic/	
-### Step 6. 제거
-	
-#### delete
-	
-	kubectl delete -f deployment.yaml
+	curl http://10.10.16.48:31637/petclinic/
+

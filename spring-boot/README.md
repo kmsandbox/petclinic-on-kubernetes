@@ -52,26 +52,26 @@ Java support	|	Java 8
 * 2단계 build : clone 컨테이너에 다운로드된 애플리케이션 코드를 maven으로 빌드해 패키지를 만듭니다.
 * 3단계 target : build 컨테이너로부터 애플리케이션 패키지를 복사해 실행시키며 서비스 포트를 지정합니다.  
 
-	FROM alpine/git as clone
-	ARG url
-	WORKDIR /app
-	RUN git clone ${url}
+	FROM alpine/git as clone  
+	ARG url  
+	WORKDIR /app  
+	RUN git clone ${url}  
 	
-	FROM maven:3.5-jdk-8-alpine as build
-	ARG project
-	WORKDIR /app
-	COPY --from=clone /app/${project} /app
-	RUN mvn install
+	FROM maven:3.5-jdk-8-alpine as build  
+	ARG project  
+	WORKDIR /app  
+	COPY --from=clone /app/${project} /app  
+	RUN mvn install  
 	
-	FROM openjdk:8-jre-alpine as target
-	ARG artifactid
-	ARG version
-	ENV artifact ${artifactid}-${version}.jar
-	WORKDIR /app
-	COPY --from=build /app/target/${artifact} /app
-	EXPOSE 8080
-	ENTRYPOINT ["sh", "-c"]
-	CMD ["java -jar ${artifact}"] 
+	FROM openjdk:8-jre-alpine as target  
+	ARG artifactid  
+	ARG version  
+	ENV artifact ${artifactid}-${version}.jar  
+	WORKDIR /app  
+	COPY --from=build /app/target/${artifact} /app  
+	EXPOSE 8080  
+	ENTRYPOINT ["sh", "-c"]  
+	CMD ["java -jar ${artifact}"]   
 
 #### B. 도커 이미지 빌드 (spring-boot/build.sh)
 
@@ -92,7 +92,7 @@ Java support	|	Java 8
 
 
 &nbsp;
-### Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
+### Step 4: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
 
 #### A. 컨테이너 실행 (spring-boot/run.sh)
 
@@ -108,7 +108,7 @@ Java support	|	Java 8
 
 
 &nbsp;
-### Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
+### Step 5: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
 
 #### A. 이미지 이름 변경 (spring-boot/retag-image.sh)
 
@@ -124,6 +124,7 @@ Java support	|	Java 8
 #### C. ICP Private Docker Registry에 로그인
 	
 	***확인 필요 : 로컬에서 ICP Private Docker Registry 에 연결하는 방법  ***
+
 	https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/manage_images/using_docker_cli.html
 	https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0/installing/create_ca_cert.html
 	https://docs.docker.com/engine/security/certificates/#troubleshooting-tips
@@ -149,49 +150,49 @@ Java support	|	Java 8
 
 
 &nbsp;
-### Step 5. IBM Cloud Private에 샘플 애플리케이션 배포하기
+### Step 6. IBM Cloud Private에 샘플 애플리케이션 배포하기
 
 #### A. 애플리케이션 컨테이너 실행과 노출을 위한 배포용 객체 작성 (cat spring-boot/deployment.yml)
 
 * Service 객체 : 애플리케이션 컨테이너의 외부 노출을 위해 NodePort 타입과 서비스 포트 등 지원합니다.
 * Deployment 객체 : 리플리카 셋과 이미지의 태그 이름으로 컨테이너 생성 
 
-	apiVersion: v1
-	kind: Service
-	metadata:
-	  name: sb-petclinic-service
-	  labels:
-	    app: sb-petclinic
-	spec:
-	  type: NodePort
-	  ports:
-	    - name: http
-	      port: 8080
-	      targetPort: 8080
-	  selector:
-	    app: sb-petclinic
-	---
-	apiVersion: extensions/v1beta1
-	kind: Deployment
-	metadata:
-	  labels:
-	    app: sb-petclinic
-	  name: sb-petclinic
-	spec:
-	  replicas: 1
-	  template:
-	    metadata:
-	      labels:
-	        app: sb-petclinic
-	    spec:
-	      containers:
-	      - image: stdcluster.icp:8500/default/spring-petclinic
-	        name: sb-petclinic
-	        ports:
-	        - containerPort: 8080
-	          protocol: TCP
+	apiVersion: v1  
+	kind: Service  
+	metadata:  
+	  name: sb-petclinic-service  
+	  labels:  
+	    app: sb-petclinic  
+	spec:  
+	  type: NodePort   
+	  ports:  
+	    - name: http  
+	      port: 8080  
+	      targetPort: 8080  
+	  selector:  
+	    app: sb-petclinic  
+	---  
+	apiVersion: extensions/v1beta1  
+	kind: Deployment  
+	metadata:  
+	  labels:  
+	    app: sb-petclinic  
+	  name: sb-petclinic  
+	spec:  
+	  replicas: 1  
+	  template:   
+	    metadata:  
+	      labels:  
+	        app: sb-petclinic  
+	    spec:  
+	      containers:  
+	      - image: stdcluster.icp:8500/default/spring-petclinic  
+	        name: sb-petclinic  
+	        ports:  
+	        - containerPort: 8080  
+	          protocol: TCP  
 
-#### B. Deployment 객체 배포
+#### B. Deployment 객체 배포  (spring-boot/apply-yaml.sh)
 
 	# kubectl apply -f deployment.yaml
 
