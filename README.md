@@ -1,6 +1,6 @@
 # 스프링 애플리케이션을 IBM Cloud Private (Kubernetes)로 마이그레이션 하기
   
-* 스프링 샘플 애플리케이션 **PetClinic**을 도커 이미지로 만들어 ICP의 Private Docker Registry에 등록하고, 애플리케이션 구성을 기술하는 Deployment 객체를 YAML 포맷으로 작성해서 쿠버네티스 클러스터에 적용하는 과정을 설명합니다.
+* 스프링 샘플 애플리케이션 **PetClinic**을 도커 이미지로 만들어 ICP의 Private Docker Registry에 등록하고, 애플리케이션 구성을 기술하는 Deployment 객체를 YAML 포맷으로 작성해서 쿠버네티스 클러스터에 배포하는 과정을 설명합니다.
 
 * 마이그레이션 실습 대상은 3가지 입니다.
 	1. Spring Canonical : [Spring Boot](https://github.com/kmsandbox/petclinic-on-kubernetes/tree/master/spring-boot)
@@ -13,13 +13,13 @@
 &nbsp;
 ### 목차
 
-	* 전제조건
-	* 테스트 및 배포 환경 
-	* Spring PetClinc 샘플 애플리케이션 소개
+1. 전제조건
+2. 테스트 및 배포 환경 
+3. Spring PetClinc 샘플 애플리케이션 소개
 
 
 &nbsp;
-## 전제 조건
+## 1. 전제조건
 
 실습을 위해서는 Docker와 Kubernetes 등의 실행환경과 각종 관리도구가 필요합니다. 실습 시작 전에 아래 도구들을 테스트/운영 환경에 설치해주세요.
 
@@ -39,7 +39,7 @@
 
 
 &nbsp;
-## 테스트 환경
+## 2. 테스트 환경
 
 1. 로컬 : MacOS, or Windows with Docker Toolbox
 
@@ -51,7 +51,7 @@
 
 
 &nbsp;
-## 스프링 PetClinic 샘플 애플리케이션
+## 3. 스프링 PetClinic 샘플 애플리케이션
 
 Spring PetClinic은 소유자와 애완동물, 수의사, 진료예약 등을 등록, 관리하는 간단한 샘플 애플리케이션입니다. 다양한 스프링 프레임워크 기술 스택을 활용해 간단하지만 강력한 DB 연동 애플리케이션을 구현하는 방법을 시연하는 목적을 가지고 있습니다.  
 
@@ -83,15 +83,26 @@ Link	| Main technologies
 &nbsp;
 #### Spring PetClinic: Screenshots
 
+메인 페이지
 ![Welcome](images/UI_Welcome.png)
 
+&nbsp;
+소유자 찾기
 ![](images/UI_OwnerFind.png)
 
+&nbsp;
+소유자 목록
 ![](images/UI_OwnerList.png)
 
+&nbsp;
+소유자 상세정보 
 ![](images/UI_OwnerDetail.png)
 
+&nbsp;
+수의사 목록
 ![](images/UI_VetsList.png) 
+
+&nbsp;
 
   
 
