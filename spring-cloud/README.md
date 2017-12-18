@@ -87,10 +87,7 @@ Admin Server (Spring Boot Admin) | http://localhost:9090
 	# cd spring-petclinic-microservices
 	# docker-compose up 
 	
-
-docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령어를 순차적으로 실행시켜 다시 시도합니다.
-
-* spring-cloud/test-local-docker-2.sh
+docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령어를 순차적으로 실행시켜 다시 시도합니다. (spring-cloud/test-local-docker-2.sh)
 	
 	# docker-compose up config-server &
 	# sleep 60s
@@ -187,7 +184,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 #### A. Kompose로 docker-compose.yml을 변환해 Kubernetes용 yaml 만들기
 
-Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는 툴입니다. 아래 명령어를 실행하면 각 애플리케이션 서비스에 대해 Service와 Deployment 객체가 만들어 집니다.
+Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는 도구입니다. 아래 명령어를 실행하면 각 애플리케이션 서비스에 대해 Service와 Deployment 객체가 만들어 집니다.
 
 	# cd yaml4kube
 	# cp ../spring-petclinic-microservices/docker-compose.yml .
