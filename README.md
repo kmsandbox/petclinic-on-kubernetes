@@ -39,15 +39,16 @@
 
 
 &nbsp;
-## 2. 테스트 환경
+## 2. 테스트 및 배포 환경 
 
-1. 로컬 : MacOS, or Windows with Docker Toolbox
+### 테스트 환경
+
+* 로컬머신 : MacOS or Windows with Docker Toolbox
 
 ## 배포/운영 환경
 
-1. MiniKube or ICP @ Local
-	- MiniKube
-	- ICP 서버 : Master, Proxy, Worker 1/2 [스펙]
+* 로컬머신 또는 원격서버 : IBM Cloud Private Community Edition
+	* 최소 HW 요구사항 - 싱글노드 : 4Core, 8GB RAM, 151GB DISK [Spec](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_2.1.0/supported_system_config/hardware_reqs.html)
 
 
 &nbsp;
@@ -103,13 +104,4 @@ Link	| Main technologies
 ![](images/UI_VetsList.png) 
 
 &nbsp;
-
-  
-
-
-
-
-
-
-
 

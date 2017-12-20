@@ -119,6 +119,10 @@ CMD ["java -jar ${artifact}"]
 &nbsp;
 ### Step 5: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
 
+* ICP의 Private Docker Registry에 등록되는 이미지는 Kubernetes Cluster와 Namespace 별로 구분됩니다. 여기에서는 Cluster와 Namespace를 각각 아래와 같이 기입해 사용합니다.
+	* Cluster Name : stdcluster.icp  [ICP CE 설치시 디폴트는 mycluster.icp ]
+	* Namespace Name : default  [ICP CE 설치시 디폴트 네임스페이스]  
+
 #### A. 이미지 이름 변경 (spring-boot/retag-image.sh)
 
 	# docker tag nfrankel/spring-petclinic:latest stdcluster.icp:8500/default/spring-petclinic:latest
