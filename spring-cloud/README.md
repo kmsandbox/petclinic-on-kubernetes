@@ -15,7 +15,7 @@ Databases support	|	HSQLDB, MySQL
 &nbsp;
 ## 목차
 
-* [Step 1: 실습용 쉘 스크립트 다운로드](#STEP_1)
+* <a href="STEP_1">Step 1: 실습용 쉘 스크립트 다운로드</a>
 * [Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드](#STEP_2)
 * [Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인](#STEP_3)
 * [Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기](#STEP_4)
@@ -36,14 +36,14 @@ Admin Server (Spring Boot Admin) | http://localhost:9090 | 관리 서버
 
 
 &nbsp;
-### <a href="STEP_1">Step 1: 실습용 쉘 스크립트 다운로드</a>
+### [Step 1: 실습용 쉘 스크립트 다운로드](#STEP_1)
 
 	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
 	# cd spring-cloud
 
 
 &nbsp;
-### <a href="STEP_2">Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드</a
+### <a href="STEP_2">Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드</a>
 
 
 #### A. 샘플 애플리케이션 소스 다운로드 (spring-cloud/clone-petclinic-microservices.sh)
