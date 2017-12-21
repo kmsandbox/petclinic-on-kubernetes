@@ -175,7 +175,7 @@ CMD ["java -jar ${artifact}"]
 
 #### E. ICP UI에서 등록된 이미지 목록 확인
 
-![Spring Boot Images](images/UI_ICP_BootFrameworkImages.png)
+![Spring Boot Images](../images/UI_ICP_BootFrameworkImages.png)
 
 &nbsp;
 ### Step 6. IBM Cloud Private에 샘플 애플리케이션 배포하기

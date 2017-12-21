@@ -214,7 +214,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 #### E. ICP UI에서 등록된 이미지 목록 확인
 
-![Microservices Images](images/UI_ICP_CloudImages.png)
+![Microservices Images](../images/UI_ICP_CloudImages.png)
 
 
 &nbsp;
@@ -272,20 +272,20 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 * 수정 대상
 	* discovery-server-deployment.yaml
 
-	# 수정 전
-      - command:
-        - ./wait-for-it.sh
-        - config-server:8888
-        - --timeout=60
-        - --
-        - java
-        - -Djava.security.egd=file:/dev/./urandom
-        - -jar
-        - /app.jar
+	* 수정 전
+	      - command:
+	        - ./wait-for-it.sh
+	        - config-server:8888
+	        - --timeout=60
+	        - --
+	        - java
+	        - -Djava.security.egd=file:/dev/./urandom
+	        - -jar
+	        - /app.jar
 
-	# 수정 후
-      - command: ["/bin/sh", "-c"]
-        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
+	* 수정 후
+	      - command: ["/bin/sh", "-c"]
+	        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
 
 * 수정 대상
 	* customers-service-deployment.yaml
@@ -295,20 +295,20 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	* tracing-server-deployment.yaml
 	* admin-server-deployment.yaml
 
-	# 수정 전
-      - command:
-        - ./wait-for-it.sh
-        - discovery-server:8761
-        - --timeout=60
-        - --
-        - java
-        - -Djava.security.egd=file:/dev/./urandom
-        - -jar
-        - /app.jar
+	* 수정 전
+	      - command:
+	        - ./wait-for-it.sh
+	        - discovery-server:8761
+	        - --timeout=60
+	        - --
+	        - java
+	        - -Djava.security.egd=file:/dev/./urandom
+	        - -jar
+	        - /app.jar
 
-	# 수정 후
-      - command: ["/bin/sh", "-c"]
-        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
+	* 수정 후
+	      - command: ["/bin/sh", "-c"]
+	        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
 
 
 
