@@ -74,16 +74,18 @@ Admin Server (Spring Boot Admin) | http://localhost:9090
 
 * 각 서비스 폴더의 ./src/main/docker/에 Dockerfile가 미리 작성되어 있습니다.
 
-	FROM java:8
-	VOLUME /tmp
-	ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh wait-for-it.sh
-	RUN bash -c 'chmod +x wait-for-it.sh'
-	ARG ARTIFACT_NAME
-	ADD ${ARTIFACT_NAME}.jar /app.jar
-	ENV SPRING_PROFILES_ACTIVE docker
-	RUN bash -c 'touch /app.jar'
-	EXPOSE <PORT_NUM>
-	ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+```
+FROM java:8
+VOLUME /tmp
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh wait-for-it.sh
+RUN bash -c 'chmod +x wait-for-it.sh'
+ARG ARTIFACT_NAME
+ADD ${ARTIFACT_NAME}.jar /app.jar
+ENV SPRING_PROFILES_ACTIVE docker
+RUN bash -c 'touch /app.jar'
+EXPOSE <PORT_NUM>
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
+```
 
 #### D. 도커 이미지 확인 
 
