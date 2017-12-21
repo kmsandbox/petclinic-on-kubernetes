@@ -13,6 +13,15 @@ Databases support	|	HSQLDB, MySQL
 
 
 &nbsp;
+## 목차
+
+* Step 1: 실습용 쉘 스크립트 다운로드
+* Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드
+* Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
+* Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
+* Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기  
+
+&nbsp;
 ## 구성요소
 
 Spring Cloud components|URL & Port
@@ -193,7 +202,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 
 &nbsp;
-### Step 5. IBM Cloud Private에 샘플 애플리케이션 배포하기
+### Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기
 
 
 #### A. Kompose로 docker-compose.yml을 변환해 Kubernetes용 yaml 만들기

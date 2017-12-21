@@ -14,6 +14,16 @@ Java support	|	Java 7 and 8
 
 
 &nbsp;
+## 목차
+
+* Step 1: 실습용 쉘 스크립트 다운로드
+* Step 2: 마이그레이션 대상 애플리케이션의 정상 동작 여부 확인
+* Step 3: 샘플 애플리케이션과 실행 환경을 도커 이미지로 작성
+* Step 4: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
+* Step 5: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
+* Step 6. IBM Cloud Private에 샘플 애플리케이션 배포하기  
+
+&nbsp;
 ### Step 1: 실습용 쉘 스크립트 다운로드
 
 	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
