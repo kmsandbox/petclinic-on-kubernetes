@@ -15,12 +15,12 @@ Databases support	|	HSQLDB, MySQL
 &nbsp;
 ## 목차
 
-* <a href="STEP_1">Step 1: 실습용 쉘 스크립트 다운로드</a>
-* [Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드](#STEP_2)
-* [Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인](#STEP_3)
-* [Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기](#STEP_4)
-* [Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기](#STEP_5)
-* [스크린샷](#SCREEN)
+* Step 1: 실습용 쉘 스크립트 다운로드
+* Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드
+* Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
+* Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
+* Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기
+* 스크린샷: Spring Cloud PetClinic Application 
 
 &nbsp;
 ## 구성요소
@@ -36,14 +36,14 @@ Admin Server (Spring Boot Admin) | http://localhost:9090 | 관리 서버
 
 
 &nbsp;
-### [Step 1: 실습용 쉘 스크립트 다운로드](#STEP_1)
+### Step 1: 실습용 쉘 스크립트 다운로드
 
 	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
 	# cd spring-cloud
 
 
 &nbsp;
-### <a href="STEP_2">Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드</a>
+### Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드
 
 
 #### A. 샘플 애플리케이션 소스 다운로드 (spring-cloud/clone-petclinic-microservices.sh)
@@ -105,7 +105,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 
 &nbsp;
-### <a href="STEP_3">Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인</a>
+### Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
 
 
 #### A. 컨테이너 실행 (spring-cloud/test-local-docker-1.sh)
@@ -153,7 +153,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 	
 
 &nbsp;
-### <a href="STEP_4">Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기</a>
+### Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
 
 * ICP의 Private Docker Registry에 등록되는 이미지는 Kubernetes Cluster와 Namespace 별로 구분됩니다. 여기에서는 Cluster와 Namespace를 각각 아래와 같이 기입해 사용합니다.
 	* Cluster Name : mycluster.icp  [ICP CE 설치시 디폴트 클러스터]
@@ -219,7 +219,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 
 &nbsp;
-### <a href="STEP_5">Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기</a>
+### Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기
 
 
 #### A. Kompose로 docker-compose.yml을 변환해 Kubernetes용 yaml 만들기 (spring-cloud/convert-docker-compose.sh)
@@ -381,7 +381,7 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 
 
 &nbsp;
-### <a href="SCREEN">스크린샷 : Spring Cloud PetClinic Application</a>
+### 스크린샷: Spring Cloud PetClinic Application
 
 Discovery Server: Eureka  
 ![Discovery Server](../images/UI_MS_DiscoveryServer.png)
