@@ -15,11 +15,12 @@ Databases support	|	HSQLDB, MySQL
 &nbsp;
 ## 목차
 
-* Step 1: 실습용 쉘 스크립트 다운로드
-* Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드
-* Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
-* Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
-* Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기  
+* [Step 1: 실습용 쉘 스크립트 다운로드](#STEP_1)
+* [Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드](#STEP_2)
+* [Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인](#STEP_3)
+* [Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기](#STEP_4)
+* [Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기](#STEP_5)
+* [스크린샷](#SCREEN)
 
 &nbsp;
 ## 구성요소
@@ -35,14 +36,14 @@ Admin Server (Spring Boot Admin) | http://localhost:9090 | 관리 서버
 
 
 &nbsp;
-### Step 1: 실습용 쉘 스크립트 다운로드
+### <a href="STEP_1">Step 1: 실습용 쉘 스크립트 다운로드</a>
 
 	# git clone https://github.com/kmsandbox/petclinic-on-kubernetes.git
 	# cd spring-cloud
 
 
 &nbsp;
-### Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드
+### <a href="STEP_2">Step 2: 마이그레이션 대상 애플리케이션의 도커 이미지 빌드</a
 
 
 #### A. 샘플 애플리케이션 소스 다운로드 (spring-cloud/clone-petclinic-microservices.sh)
@@ -104,7 +105,7 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 
 
 &nbsp;
-### Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인
+### <a href="STEP_3">Step 3: 도커 컨테이너 실행 및 애플리케이션 서비스 동작 확인</a>
 
 
 #### A. 컨테이너 실행 (spring-cloud/test-local-docker-1.sh)
@@ -152,7 +153,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 	
 
 &nbsp;
-### Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
+### <a href="STEP_4">Step 4: IBM Cloud Private - Private Docker Registry에 이미지 등록하기</a>
 
 * ICP의 Private Docker Registry에 등록되는 이미지는 Kubernetes Cluster와 Namespace 별로 구분됩니다. 여기에서는 Cluster와 Namespace를 각각 아래와 같이 기입해 사용합니다.
 	* Cluster Name : mycluster.icp  [ICP CE 설치시 디폴트 클러스터]
@@ -218,7 +219,7 @@ docker-compose up으로 서비스가 잘 시작되지 않는다면 아래 명령
 
 
 &nbsp;
-### Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기
+### <a href="STEP_5">Step 5: IBM Cloud Private에 샘플 애플리케이션 배포하기</a>
 
 
 #### A. Kompose로 docker-compose.yml을 변환해 Kubernetes용 yaml 만들기 (spring-cloud/convert-docker-compose.sh)
@@ -352,7 +353,7 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 
 서비스 목록을 확인해 각 샘플 애플리케이션 서비스의 NodePort를 확인하고, 서비스 동작 여부를 확인합니다.
 
-	# kubectl get deploy,svc
+	# kubectl get svc -l io.kompose.service
 	
 	# curl http://<Proxy_IP>:<NodePort>
 
@@ -380,5 +381,20 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 
 
 &nbsp;
-### Spring Cloud PetClinic Application: Screenshots
+### <a href="SCREEN">스크린샷 : Spring Cloud PetClinic Application</a>
+
+Discovery Server: Eureka  
+![Discovery Server](../images/UI_MS_DiscoveryServer.png)
+
+Admin Server  
+![Admin Server](../images/UI_MS_AdminServer.png)
+
+Tracing Server: Zipkin
+![Tracing Server](../images/UI_MS_TracingServer.png)
+
+API Gateway & Frontend
+![Gateway Server - Frontend](../images/UI_MS_GatewayFrontend.png)
+
+
+
 
