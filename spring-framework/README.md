@@ -128,33 +128,34 @@ CMD ["catalina.sh", "run"]
 ### Step 5: IBM Cloud Private - Private Docker Registry에 이미지 등록하기
 
 * ICP의 Private Docker Registry에 등록되는 이미지는 Kubernetes Cluster와 Namespace 별로 구분됩니다. 여기에서는 Cluster와 Namespace를 각각 아래와 같이 기입해 사용합니다.
-	* Cluster Name : stdcluster.icp  [ICP CE 설치시 디폴트는 mycluster.icp ]
+	* Cluster Name : mycluster.icp  [ICP CE 설치시 디폴트는 mycluster.icp ]
 	* Namespace Name : default  [ICP CE 설치시 디폴트 네임스페이스]  
 	
 
 #### A. 이미지 이름 변경 (spring-framework/retag-image.sh)
 
-	# docker tag local-docker/spring-framework-petclinic:latest stdcluster.icp:8500/default/spring-framework-petclinic:latest
+	# docker tag local-docker/spring-framework-petclinic:latest mycluster.icp:8500/default/spring-framework-petclinic:latest
 
 #### B. 이미지 이름 확인 
 	
 	# docker images | grep spring-framework-petclinic
 
 	local-docker/spring-framework-petclinic	latest	7b9b87c280af	3 days ago	491MB
-	stdcluster.icp:8500/default/spring-framework-petclinic	latest	7b9b87c280af	3 days ago	491MB
+	mycluster.icp:8500/default/spring-framework-petclinic	latest	7b9b87c280af	3 days ago	491MB
 
 #### C. ICP Private Docker Registry에 로그인
 	
 ***확인 필요 : 로컬에서 ICP Private Docker Registry 에 연결하는 방법  ***
 
-	# docker login stdcluster.icp:8500
+	# docker login mycluster.icp:8500
 
 #### D. ICP Private Docker Registry에 이미지 등록 (spring-framework/push-image.sh)
 
-	# docker push stdcluster.icp:8500/default/spring-framework-petclinic		
+	# docker push mycluster.icp:8500/default/spring-framework-petclinic		
 
 #### E. ICP UI에서 등록된 이미지 목록 확인
 
+![Spring Boot Images](images/UI_ICP_BootFrameworkImages.png)
 
 &nbsp;
 ### Step 6. IBM Cloud Private에 샘플 애플리케이션 배포하기
@@ -195,7 +196,7 @@ spec:
         app: sf-petclinic
     spec:
       containers:
-      - image: stdcluster.icp:8500/default/spring-framework-petclinic
+      - image: mycluster.icp:8500/default/spring-framework-petclinic
         name: sf-petclinic
         ports:
         - containerPort: 8080

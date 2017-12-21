@@ -27,7 +27,7 @@ spec:
         - -Djava.security.egd=file:/dev/./urandom
         - -jar
         - /app.jar
-        image: stdcluster.icp:8500/default/spring-petclinic-visits-service
+        image: mycluster.icp:8500/default/spring-petclinic-visits-service
         name: visits-service
         ports:
         - containerPort: 8082

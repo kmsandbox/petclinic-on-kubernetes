@@ -27,7 +27,7 @@ spec:
         app: sf-petclinic
     spec:
       containers:
-      - image: stdcluster.icp:8500/default/spring-framework-petclinic
+      - image: mycluster.icp:8500/default/spring-framework-petclinic
         name: sf-petclinic
         ports:
         - containerPort: 8080

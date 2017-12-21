@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.6.0 (e4adfef)
   creationTimestamp: null
   labels:
-    io.kompose.service: discovery-server
-  name: discovery-server
+    io.kompose.service: api-gateway
+  name: api-gateway
 spec:
   replicas: 1
   strategy: {}
@@ -15,22 +15,22 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: discovery-server
+        io.kompose.service: api-gateway
     spec:
       containers:
       - command:
         - ./wait-for-it.sh
-        - config-server:8888
+        - discovery-server:8761
         - --timeout=60
         - --
         - java
         - -Djava.security.egd=file:/dev/./urandom
         - -jar
         - /app.jar
-        image: stdcluster.icp:8500/default/spring-petclinic-discovery-server
-        name: discovery-server
+        image: mycluster.icp:8500/default/spring-petclinic-api-gateway
+        name: api-gateway
         ports:
-        - containerPort: 8761
+        - containerPort: 8080
         resources: {}
       restartPolicy: Always
 status: {}

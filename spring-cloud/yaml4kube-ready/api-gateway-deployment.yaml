@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.6.0 (e4adfef)
   creationTimestamp: null
   labels:
-    io.kompose.service: customers-service
-  name: customers-service
+    io.kompose.service: api-gateway
+  name: api-gateway
 spec:
   replicas: 1
   strategy: {}
@@ -15,7 +15,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: customers-service
+        io.kompose.service: api-gateway
     spec:
       containers:
       - command:
@@ -27,10 +27,10 @@ spec:
         - -Djava.security.egd=file:/dev/./urandom
         - -jar
         - /app.jar
-        image: stdcluster.icp:8500/default/spring-petclinic-customers-service
-        name: customers-service
+        image: mycluster.icp:8500/default/spring-petclinic-api-gateway
+        name: api-gateway
         ports:
-        - containerPort: 8081
+        - containerPort: 8080
         resources: {}
       restartPolicy: Always
 status: {}

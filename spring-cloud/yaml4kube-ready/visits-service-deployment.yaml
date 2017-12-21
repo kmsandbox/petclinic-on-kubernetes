@@ -6,8 +6,8 @@ metadata:
     kompose.version: 1.6.0 (e4adfef)
   creationTimestamp: null
   labels:
-    io.kompose.service: admin-server
-  name: admin-server
+    io.kompose.service: visits-service
+  name: visits-service
 spec:
   replicas: 1
   strategy: {}
@@ -15,7 +15,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        io.kompose.service: admin-server
+        io.kompose.service: visits-service
     spec:
       containers:
       - command:
@@ -27,10 +27,10 @@ spec:
         - -Djava.security.egd=file:/dev/./urandom
         - -jar
         - /app.jar
-        image: stdcluster.icp:8500/default/spring-petclinic-admin-server
-        name: admin-server
+        image: mycluster.icp:8500/default/spring-petclinic-visits-service
+        name: visits-service
         ports:
-        - containerPort: 9090
+        - containerPort: 8082
         resources: {}
       restartPolicy: Always
 status: {}

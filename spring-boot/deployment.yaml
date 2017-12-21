@@ -27,7 +27,7 @@ spec:
         app: sb-petclinic
     spec:
       containers:
-      - image: stdcluster.icp:8500/default/spring-petclinic
+      - image: mycluster.icp:8500/default/spring-petclinic
         name: sb-petclinic
         ports:
         - containerPort: 8080

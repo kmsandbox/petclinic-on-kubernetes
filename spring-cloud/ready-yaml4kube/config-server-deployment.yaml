@@ -18,7 +18,7 @@ spec:
         io.kompose.service: config-server
     spec:
       containers:
-      - image: stdcluster.icp:8500/default/spring-petclinic-config-server
+      - image: mycluster.icp:8500/default/spring-petclinic-config-server
         name: config-server
         ports:
         - containerPort: 8888
