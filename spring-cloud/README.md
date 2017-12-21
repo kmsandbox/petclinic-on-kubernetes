@@ -273,7 +273,7 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	* discovery-server-deployment.yaml
 
 		* 수정 전
-```		
+		```		
 	      - command:
 	        - ./wait-for-it.sh
 	        - config-server:8888
@@ -283,12 +283,13 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	        - -Djava.security.egd=file:/dev/./urandom
 	        - -jar
 	        - /app.jar
-```	
+		```	
+
 		* 수정 후
-```	      
+		```	      
 	      - command: ["/bin/sh", "-c"]
 	        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
-```
+		```
 
 * 수정 대상
 	* customers-service-deployment.yaml
@@ -299,7 +300,7 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	* admin-server-deployment.yaml
 
 		* 수정 전
-```
+		```
 	      - command:
 	        - ./wait-for-it.sh
 	        - discovery-server:8761
@@ -309,12 +310,13 @@ Kompose는 Compose 포맷 YAML 파일을 Kubernetes 포맷으로 변경해주는
 	        - -Djava.security.egd=file:/dev/./urandom
 	        - -jar
 	        - /app.jar
-```
+		```
+
 		* 수정 후
-```
+		```
 	      - command: ["/bin/sh", "-c"]
 	        args: ["java -Djava.security.egd=file:/dev/./urandom -jar /app.jar"]
-```
+		```
 
 
 #### D. 샘플 애플리케이션 객체 배포 (spring-cloud/kube-apply.sh)
